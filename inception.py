@@ -1,4 +1,11 @@
-import torch
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Jun 21 00:47:22 2019
+
+@author: yangzhenhuan
+"""
+
 import torch.nn as nn
 import torch.nn.functional as F
 from torchvision import models
@@ -25,7 +32,6 @@ class InceptionV3(nn.Module):
                  requires_grad=False,
                  use_fid_inception=True):
         """Build pretrained InceptionV3
-
         Parameters
         ----------
         output_blocks : list of int
@@ -65,7 +71,7 @@ class InceptionV3(nn.Module):
             'Last possible output block index is 3'
 
         self.blocks = nn.ModuleList()
-        
+
         inception = models.inception_v3(pretrained=True)
 
         # Block 0: input to maxpool1
@@ -115,13 +121,11 @@ class InceptionV3(nn.Module):
 
     def forward(self, inp):
         """Get Inception feature maps
-
         Parameters
         ----------
         inp : torch.autograd.Variable
             Input tensor of shape Bx3xHxW. Values are expected to be in
             range (0, 1)
-
         Returns
         -------
         List of torch.autograd.Variable, corresponding to the selected output
